@@ -1,7 +1,7 @@
 package com.pubnub_fcm_example.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,7 +11,7 @@ import com.pubnub_fcm_example.manager.SharedPreferenceManager;
 import com.pubnub_fcm_example.util.Constant;
 import com.pubnub_fcm_example.util.Util;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private EditText et_text;
 
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         et_text = (EditText) findViewById(R.id.et_text);
         findViewById(R.id.btn_continue).setOnClickListener(this);
+        configToolbar((Toolbar) findViewById(R.id.toolbar), (getResources().getString(R.string.main_activity)), false);
     }
 
     @Override

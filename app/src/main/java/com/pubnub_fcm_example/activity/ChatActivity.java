@@ -9,6 +9,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,7 +27,7 @@ import com.pubnub_fcm_example.util.Util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatActivity extends AppCompatActivity implements View.OnClickListener {
+public class ChatActivity extends BaseActivity implements View.OnClickListener {
 
     private class ChatReceiver extends BroadcastReceiver {
         // Prevents instantiation
@@ -63,6 +64,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        configToolbar((Toolbar) findViewById(R.id.toolbar), (getResources().getString(R.string.chatting)), true);
         init();
     }
 
