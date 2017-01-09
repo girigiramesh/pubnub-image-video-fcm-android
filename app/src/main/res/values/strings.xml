@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Pubnub-fcm-example</string>
+    <string name="hint_message">Message...</string>
+    <string name="hint_name">Name</string>
+    <string name="text_continue">Continue</string>
+    <string name="toast_name_empty">Name empty!</string>
+    <string name="toast_empty_message">Empty Message</string>
+</resources>
