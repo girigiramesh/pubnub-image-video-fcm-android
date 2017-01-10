@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pubnub_fcm_example.R;
@@ -19,22 +20,24 @@ import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private class MyTextHolder extends RecyclerView.ViewHolder {
+    public class MyTextHolder extends RecyclerView.ViewHolder {
         private TextView tv_text;
 
-        private MyTextHolder(View itemView) {
+        public MyTextHolder(View itemView) {
             super(itemView);
             tv_text = (TextView) itemView.findViewById(R.id.tv_text);
         }
     }
 
-    private class OthersTextHolder extends RecyclerView.ViewHolder {
+    public class OthersTextHolder extends RecyclerView.ViewHolder {
         private TextView tv_text, tv_name;
+        private ImageView iv_profile;
 
-        private OthersTextHolder(View itemView) {
+        public OthersTextHolder(View itemView) {
             super(itemView);
             tv_text = (TextView) itemView.findViewById(R.id.tv_text);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
+            iv_profile= (ImageView) itemView.findViewById(R.id.iv_profile);
         }
     }
 
@@ -51,6 +54,11 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void notifyList(List<Message> list) {
         this.list = list;
         notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
     }
 
     @Override
@@ -82,11 +90,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else {
             ((OthersTextHolder) holder).tv_text.setText(list.get(position).getText());
             ((OthersTextHolder) holder).tv_name.setText(list.get(position).getSenderName() + " :");
+            ((OthersTextHolder) holder).iv_profile.getDrawable();
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return list.size();
     }
 }

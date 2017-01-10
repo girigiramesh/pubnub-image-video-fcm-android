@@ -54,6 +54,14 @@ public class BaseActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+    // Permissions
+    public static String[] PERMISSIONS_TAKE_PICTURE = {
+            Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE
+    };
+    public static String[] PERMISSIONS_PICK_PHOTO = {
+            Manifest.permission.READ_EXTERNAL_STORAGE
+    };
+
     public void configToolbar(Toolbar toolbar, String title, boolean isHomeAsUp) {
         toolbar.setTitle("");
 //        toolbar.setNavigationIcon(R.mipmap.ic_launcher);

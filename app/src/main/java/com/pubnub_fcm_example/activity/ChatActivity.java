@@ -9,13 +9,11 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.pubnub_fcm_example.R;
 import com.pubnub_fcm_example.adapter.ChatAdapter;
 import com.pubnub_fcm_example.manager.PubnubManager;
@@ -49,7 +47,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    private ImageView iv_send;
+    private ImageView iv_send, iv_attach_file;
     private EditText et_message;
     private RecyclerView rv_chat;
     private ChatAdapter chatAdapter;
@@ -82,10 +80,10 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
                 PubnubManager.getInstance().publish(Constant.pubnub.CHANNEL,
                         new Message(udid, SharedPreferenceManager.getInstance().getString(Constant.preference.NAME, ""), message).toJson().toString());
                 et_message.setText("");
-//                  get the token
-//                String token = FirebaseInstanceId.getInstance().getToken();
-//                Log.d(TAG, "Token: " + token);
-//                showToast(token);
+                break;
+            case R.id.iv_attach_file:
+                CameraActivity.start(ChatActivity.this);
+                finish();
                 break;
         }
     }
@@ -95,10 +93,12 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
 
         //pull views
         iv_send = (ImageView) findViewById(R.id.iv_send);
+        iv_attach_file = (ImageView) findViewById(R.id.iv_attach_file);
         et_message = (EditText) findViewById(R.id.et_message);
         rv_chat = (RecyclerView) findViewById(R.id.rv_chat);
         //init listeners
         iv_send.setOnClickListener(this);
+        iv_attach_file.setOnClickListener(this);
 
         ChatReceiver chatReceiver = new ChatReceiver();
         IntentFilter receiveMessageIntentFilter = new IntentFilter(PubNubService.ACTION_RECEIVE_MESSAGE);

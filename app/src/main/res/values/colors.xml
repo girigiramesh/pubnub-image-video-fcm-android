@@ -9,4 +9,6 @@
     <color name="othersChatBackgroundColor">#ffffff</color>
     <color name="chatTextColor">#000000</color>
     <color name="myChatBackgroundColor">#fffacd</color>
+    <color name="black">#000000</color>
+    <color name="appColor">#8ec549</color>
 </resources>

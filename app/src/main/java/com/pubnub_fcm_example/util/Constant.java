@@ -7,6 +7,11 @@ package com.pubnub_fcm_example.util;
 public class Constant {
     public static final String ME = "chat";
 
+    public static String FROM_TO_CAM = "fromToCam";
+    public static String FROM_PROFILE = "createProfile";
+    public static String FROM_POST = "post";
+    public static String URL_NUMBER = "urlNumber";
+
     public static final class preference {
         public static final String NAME = "name";
         public static final String FCM_REG_ID = "fcm_reg_id";
