@@ -6,20 +6,21 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.pubnub_fcm_example.R;
 import com.pubnub_fcm_example.adapter.ChatAdapter;
+import com.pubnub_fcm_example.manager.PubnubManager;
 import com.pubnub_fcm_example.manager.SharedPreferenceManager;
 import com.pubnub_fcm_example.model.Message;
-import com.pubnub_fcm_example.manager.PubnubManager;
 import com.pubnub_fcm_example.service.PubNubService;
 import com.pubnub_fcm_example.util.Constant;
 import com.pubnub_fcm_example.util.Util;
@@ -79,10 +80,12 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
                 }
 
                 PubnubManager.getInstance().publish(Constant.pubnub.CHANNEL,
-                        new Message(udid,
-                        SharedPreferenceManager.getInstance().getString(Constant.preference.NAME, ""),
-                        message).toJson().toString());
+                        new Message(udid, SharedPreferenceManager.getInstance().getString(Constant.preference.NAME, ""), message).toJson().toString());
                 et_message.setText("");
+//                  get the token
+//                String token = FirebaseInstanceId.getInstance().getToken();
+//                Log.d(TAG, "Token: " + token);
+//                showToast(token);
                 break;
         }
     }

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "596244382096",
+    "firebase_url": "https://pubnub-chat-fcm.firebaseio.com",
+    "project_id": "pubnub-chat-fcm",
+    "storage_bucket": "pubnub-chat-fcm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596244382096:android:a5ba357772ce260c",
+        "android_client_info": {
+          "package_name": "com.pubnub_fcm_example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596244382096-0o1647coiu1eiokcr9jk5ogo9cdbh8dl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pubnub_fcm_example",
+            "certificate_hash": "4AD8B49D07BFA126141250122ED2DE15B3384CEC"
+          }
+        },
+        {
+          "client_id": "596244382096-frvgirl9i4sflpbp0ru4n15o8fn0njjm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgyqF2mDP7wvgmXJ20U_YLzFEG9ymNqLY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596244382096-frvgirl9i4sflpbp0ru4n15o8fn0njjm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
