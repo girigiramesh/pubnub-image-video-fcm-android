@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/take_photo"
+        android:icon="@drawable/ic_camera_alt_ash_24dp"
+        android:title="Take Photo" />
+    <item
+        android:id="@+id/photo_gallery"
+        android:icon="@drawable/ic_collections_black_24dp"
+        android:title="Photo Gallery" />
+    <item
+        android:id="@+id/send_video"
+        android:icon="@drawable/ic_videocam_black_24dp"
+        android:title="Send Video" />
+</menu>

@@ -9,6 +9,9 @@ import com.pubnub.api.PubnubError;
 import com.pubnub.api.PubnubException;
 import com.pubnub_fcm_example.service.PubNubService;
 import com.pubnub_fcm_example.util.Constant;
+import com.pubnub_fcm_example.util.Util;
+
+import org.json.JSONObject;
 
 /**
  * Created by Ramesh on 1/9/17.
@@ -83,5 +86,56 @@ public class PubnubManager {
             }
         };
         pubnub.publish(channel, message, callback);
+    }
+
+    public void publish(final String channel, final JSONObject message) {
+        if(!Util.isNotNullAndNotEmpty(pubnub.getAuthKey()) && Util.isNotNullAndNotEmpty(channel)) {
+            // Set uuid & auth_key to a base64 representation of user_id
+
+            String channelTobase64 = Util.stringToBase64(channel);
+            pubnub.setUUID(channelTobase64);
+            pubnub.setAuthKey(channelTobase64);
+        }
+
+        try {
+            assert pubnub != null;
+            if(Util.isNotNullAndNotEmpty(channel)) {
+                pubnub.publish(channel, message, new Callback() {
+                    @Override
+                    public void connectCallback(String channel, Object message) {
+                        Log.i(TAG, "publish connectCallback CONNECT on channel:" + channel);
+                        //start the resync task to speedup geo-location flow
+                        // SyncUtils.TriggerRefresh(GenericAccountService.GetAccount());
+                    }
+
+                    @Override
+                    public void disconnectCallback(String channel, Object message) {
+                        Log.i(TAG, "publish disconnectCallback DISCONNECT on channel:" + channel);
+                    }
+
+                    @Override
+                    public void reconnectCallback(String channel, Object message) {
+                        Log.i(TAG, "publish reconnectCallback RECONNECT on channel:" + channel);
+                    }
+
+                    @Override
+                    public void successCallback(String channel, Object message) {
+                        Log.i(TAG, "publish successCallback RECONNECT on channel:" + channel);
+                    }
+
+                    @Override
+                    public void errorCallback(String channel, PubnubError error) {
+                        super.errorCallback(channel, error);
+                        Log.e("publish errorCallback", channel + " " + error.getErrorString());
+                    }
+                });
+            }
+
+        } catch (Exception e) {
+            if (e.getMessage() == null)
+                e = new Exception(TAG + e);
+            Log.e(TAG, "subscribe: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

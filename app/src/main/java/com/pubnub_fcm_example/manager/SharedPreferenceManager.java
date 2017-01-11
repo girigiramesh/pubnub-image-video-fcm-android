@@ -58,6 +58,10 @@ public class SharedPreferenceManager {
         (sharedPreferences.edit()).putLong(key, value).apply();
     }
 
+    public String getAccountId() {
+        return SharedPreferenceManager.getInstance().getString(Constant.preference.ACCOUNT_ID, "");
+    }
+
     public long getLong(String key, long defaultVal) {
         if (sharedPreferences != null) {
             return sharedPreferences.getLong(key, defaultVal);
@@ -92,5 +96,13 @@ public class SharedPreferenceManager {
 
     public void clear() {
         sharedPreferences.edit().clear().apply();
+    }
+
+    public String getRequestKey() {
+        return sharedPreferences.getString(Constant.preference.REQUEST_KEY, "");
+    }
+
+    public String getFullName() {
+        return (getString(Constant.preference.FIRST_NAME, "") + " " + getString(Constant.preference.LAST_NAME, "")).trim();
     }
 }

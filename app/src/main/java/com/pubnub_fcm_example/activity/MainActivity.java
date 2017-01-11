@@ -23,7 +23,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (Util.isNotNullAndNotEmpty(SharedPreferenceManager.getInstance().getString(Constant.preference.NAME, ""))) {
             ChatActivity.start(this);

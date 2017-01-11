@@ -1,56 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/chatBackgroundColor"
+    android:background="@color/white"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_chat"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/messages_swipe_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:padding="8dp" />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/chat_options_layout"
+        android:layout_below="@id/toolbar">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:padding="4dp" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout
+        android:id="@id/chat_options_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="4dp"
-        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorMessageBarGrey"
         android:elevation="3dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:minHeight="60dp"
+        android:orientation="horizontal"
+        android:padding="8dp">
 
         <ImageView
-            android:id="@+id/iv_attach_file"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="16dp"
+            android:id="@+id/chat_bot_iv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="8dp"
             android:background="@drawable/ic_attach_file_black_24dp" />
 
+
         <EditText
-            android:id="@+id/et_message"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:id="@+id/et_text_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:background="@drawable/rounded_corners_edit_text_selector"
-            android:hint="@string/hint_message"
-            android:paddingBottom="4dp"
-            android:paddingLeft="6dp"
-            android:paddingTop="6dp"
-            android:textSize="16sp" />
+            android:gravity="center_vertical"
+            android:hint="Message.."
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLines="3"
+            android:minHeight="48dp"
+            android:paddingLeft="16dp"
+            android:textSize="14sp" />
+
 
         <ImageView
-            android:id="@+id/iv_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="16dp"
+            android:id="@+id/send_tv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
             android:background="@drawable/ic_send_black_24dp" />
     </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

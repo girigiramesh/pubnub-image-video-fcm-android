@@ -11,4 +11,7 @@
     <color name="myChatBackgroundColor">#fffacd</color>
     <color name="black">#000000</color>
     <color name="appColor">#8ec549</color>
+    <color name="colorMessageBarGrey">#F9F9F9</color>
+    <color name="colorSubTitle">#555555</color>
+    <color name="colorBlue">#369dff</color>
 </resources>
