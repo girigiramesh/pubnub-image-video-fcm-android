@@ -312,6 +312,8 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
             rv_chat.setAdapter(chatAdapter);
         } else {
             chatAdapter.rebuild(MessageModels);
+            if (swipe_view_srl.isRefreshing())
+                swipe_view_srl.setRefreshing(false);
         }
     }
 }
