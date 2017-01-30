@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.pubnub_fcm_example.R;
 import com.pubnub_fcm_example.manager.EventMessage;
 import com.pubnub_fcm_example.manager.SharedPreferenceManager;
+import com.pubnub_fcm_example.service.CreateMessageService;
 import com.pubnub_fcm_example.util.Constant;
 import com.pubnub_fcm_example.util.Util;
 
@@ -73,7 +74,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(EventMessage event) {
         switch (event.getEvent()) {
-            case EventMessage.REPORT_S3_FILE_UPLOAD:
+            case CreateMessageService.ACTION_MESSAGE:
                 if (event.isSuccess()) {
                     ChatActivity.start(this);
                     finish();

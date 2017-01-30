@@ -323,7 +323,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(EventMessage event) {
         switch (event.getEvent()) {
-            case EventMessage.REPORT_S3_FILE_UPLOAD:
+            case CreateMessageService.ACTION_MESSAGE:
                 if (event.isSuccess()) {
                     showToast("uploading....");
                 } else {
