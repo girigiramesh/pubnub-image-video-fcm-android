@@ -37,6 +37,10 @@ import com.pubnub_fcm_example.service.PubNubService;
 import com.pubnub_fcm_example.util.Constant;
 import com.pubnub_fcm_example.util.Util;
 
+import net.hockeyapp.android.CrashManager;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +85,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         setContentView(R.layout.activity_chat);
         configToolbar((Toolbar) findViewById(R.id.toolbar), (getResources().getString(R.string.chatting)), true);
         init();
@@ -113,7 +118,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-//        CrashManager.register(this);
+        CrashManager.register(this);
         SharedPreferenceManager.getInstance().putString(Constant.preference.OPEN_CHANNEL_ID, channel);
         SharedPreferenceManager.getInstance().putString(Constant.preference.SENDER_ID, hisId);
         if (mTracker != null) {
@@ -131,6 +136,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
 
         if (localBroadcastManager != null)
             localBroadcastManager.unregisterReceiver(chatReceiver);

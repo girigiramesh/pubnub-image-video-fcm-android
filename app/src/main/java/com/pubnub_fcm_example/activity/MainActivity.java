@@ -13,6 +13,10 @@ import com.pubnub_fcm_example.manager.SharedPreferenceManager;
 import com.pubnub_fcm_example.util.Constant;
 import com.pubnub_fcm_example.util.Util;
 
+import net.hockeyapp.android.CrashManager;
+
+import org.greenrobot.eventbus.EventBus;
+
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private EditText et_text;
@@ -29,10 +33,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             ChatActivity.start(this);
             finish();
         }
+        EventBus.getDefault().register(this);
         setContentView(R.layout.activity_main);
         et_text = (EditText) findViewById(R.id.et_text);
         findViewById(R.id.btn_continue).setOnClickListener(this);
         configToolbar((Toolbar) findViewById(R.id.toolbar), (getResources().getString(R.string.main_activity)), false);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CrashManager.register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override

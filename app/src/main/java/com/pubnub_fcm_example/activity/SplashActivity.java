@@ -6,6 +6,8 @@ import android.os.Handler;
 import com.pubnub_fcm_example.R;
 import com.pubnub_fcm_example.manager.SessionManager;
 
+import net.hockeyapp.android.CrashManager;
+
 
 /**
  * Created by Ramesh on 1/10/17.
@@ -37,6 +39,6 @@ public class SplashActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 //        HockeyApp
-//        CrashManager.register(this);
+        CrashManager.register(this);
     }
 }
