@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.pubnub_fcm_example.R;
+import com.pubnub_fcm_example.manager.EventMessage;
 import com.pubnub_fcm_example.manager.SharedPreferenceManager;
 import com.pubnub_fcm_example.util.Constant;
 import com.pubnub_fcm_example.util.Util;
@@ -16,6 +17,8 @@ import com.pubnub_fcm_example.util.Util;
 import net.hockeyapp.android.CrashManager;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -63,6 +66,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
                 SharedPreferenceManager.getInstance().putString(Constant.preference.NAME, name);
                 ChatActivity.start(this);
+                break;
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getMessage(EventMessage event) {
+        switch (event.getEvent()) {
+            case EventMessage.REPORT_S3_FILE_UPLOAD:
+                if (event.isSuccess()) {
+                    ChatActivity.start(this);
+                    finish();
+                } else {
+                    showToast(event.getMessage());
+                }
                 break;
         }
     }

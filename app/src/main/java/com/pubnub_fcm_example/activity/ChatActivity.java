@@ -29,6 +29,7 @@ import com.cocosw.bottomsheet.BottomSheet;
 import com.google.android.gms.analytics.HitBuilders;
 import com.pubnub_fcm_example.R;
 import com.pubnub_fcm_example.adapter.ChatAdapter;
+import com.pubnub_fcm_example.manager.EventMessage;
 import com.pubnub_fcm_example.manager.PubnubManager;
 import com.pubnub_fcm_example.manager.SharedPreferenceManager;
 import com.pubnub_fcm_example.model.Message;
@@ -40,6 +41,8 @@ import com.pubnub_fcm_example.util.Util;
 import net.hockeyapp.android.CrashManager;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -314,6 +317,19 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
             chatAdapter.rebuild(MessageModels);
             if (swipe_view_srl.isRefreshing())
                 swipe_view_srl.setRefreshing(false);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getMessage(EventMessage event) {
+        switch (event.getEvent()) {
+            case EventMessage.REPORT_S3_FILE_UPLOAD:
+                if (event.isSuccess()) {
+                    showToast("uploading....");
+                } else {
+                    showToast(event.getMessage());
+                }
+                break;
         }
     }
 }
