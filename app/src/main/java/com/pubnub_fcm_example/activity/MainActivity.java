@@ -16,6 +16,7 @@ import com.pubnub_fcm_example.util.Constant;
 import com.pubnub_fcm_example.util.Util;
 
 import net.hockeyapp.android.CrashManager;
+import net.hockeyapp.android.UpdateManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -37,7 +38,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             ChatActivity.start(this);
             finish();
         }
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
+        checkForUpdates();
         setContentView(R.layout.activity_main);
         et_text = (EditText) findViewById(R.id.et_text);
         findViewById(R.id.btn_continue).setOnClickListener(this);
@@ -47,13 +49,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        CrashManager.register(this);
+//        CrashManager.register(this);
+        checkForUpdates();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        unregisterManagers();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
+//        EventBus.getDefault().unregister(this);
+        unregisterManagers();
     }
 
     @Override
@@ -84,4 +94,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
         }
     }
+
+    private void checkForUpdates() {
+        // Remove this for store builds!
+        UpdateManager.register(this);
+    }
+
+    private void unregisterManagers() {
+        UpdateManager.unregister();
+    }
+
 }

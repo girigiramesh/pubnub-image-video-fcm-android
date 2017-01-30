@@ -39,6 +39,7 @@ import com.pubnub_fcm_example.util.Constant;
 import com.pubnub_fcm_example.util.Util;
 
 import net.hockeyapp.android.CrashManager;
+import net.hockeyapp.android.UpdateManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -93,6 +94,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
         configToolbar((Toolbar) findViewById(R.id.toolbar), (getResources().getString(R.string.chatting)), true);
         init();
         initBroadcastReceiver();
+        checkForUpdates();
 
         myId = SharedPreferenceManager.getInstance().getAccountId();
         hisId = getIntent().getStringExtra(Message.FROM_ID);
@@ -121,7 +123,8 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        CrashManager.register(this);
+//        CrashManager.register(this);
+        checkForUpdates();
         SharedPreferenceManager.getInstance().putString(Constant.preference.OPEN_CHANNEL_ID, channel);
         SharedPreferenceManager.getInstance().putString(Constant.preference.SENDER_ID, hisId);
         if (mTracker != null) {
@@ -133,13 +136,15 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onPause() {
         super.onPause();
+        unregisterManagers();
         SharedPreferenceManager.getInstance().remove(Constant.preference.OPEN_CHANNEL_ID);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
+        unregisterManagers();
+//        EventBus.getDefault().unregister(this);
 
         if (localBroadcastManager != null)
             localBroadcastManager.unregisterReceiver(chatReceiver);
@@ -331,5 +336,14 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
                 }
                 break;
         }
+    }
+
+    private void checkForUpdates() {
+        // Remove this for store builds!
+        UpdateManager.register(this);
+    }
+
+    private void unregisterManagers() {
+        UpdateManager.unregister();
     }
 }
